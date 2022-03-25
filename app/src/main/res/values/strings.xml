@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Test Application</string>
+
+    <string name="network_error">No network connection.</string>
+    <string name="errorString">Something went wrong, Please try again.</string>
+    <string name="model">%1$s - %2$s</string>
+    <string name="social_media">Social Media</string>
+    <string name="offers">Offers</string>
+
+</resources>

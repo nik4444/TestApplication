@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        socialMediaAdapter = new SocialMediaAdapter(new ArrayList<>());
+        socialMediaAdapter = new SocialMediaAdapter(this, new ArrayList<>());
         bannerAdapter = new BannerAdapter(new ArrayList<>());
 
         progressDialog = AppConstant.getProgressDialog(this, "Please wait...");

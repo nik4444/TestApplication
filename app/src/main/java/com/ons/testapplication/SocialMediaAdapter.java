@@ -1,5 +1,8 @@
 package com.ons.testapplication;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,16 +20,18 @@ import java.util.List;
 
 public class SocialMediaAdapter extends RecyclerView.Adapter<SocialMediaAdapter.SocialMediaViewHolder> {
 
+    public Context context;
     private List<Features> featuresList;
 
-    public SocialMediaAdapter(List<Features> data) {
+    public SocialMediaAdapter(Context context, List<Features> data) {
         this.featuresList = data;
+        this.context = context;
     }
 
     @NonNull
     @Override
     public SocialMediaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new SocialMediaViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_social, parent, false));
+        return new SocialMediaViewHolder(featuresList, context, LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_social, parent, false));
     }
 
     @Override
@@ -60,10 +65,15 @@ public class SocialMediaAdapter extends RecyclerView.Adapter<SocialMediaAdapter.
         private final TextView tvSocialName;
         private final ImageView image;
 
-        public SocialMediaViewHolder(@NonNull View itemView) {
+        public SocialMediaViewHolder(List<Features> featuresList, Context context, @NonNull View itemView) {
             super(itemView);
             tvSocialName = itemView.findViewById(R.id.tvSocialName);
             image = itemView.findViewById(R.id.imageView1);
+            image.setOnClickListener(view -> {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(featuresList.get(getAdapterPosition()).getRedirectUrl()));
+                context.startActivity(i);
+            });
         }
     }
 }
